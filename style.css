@@ -1,443 +1,225 @@
-/* Reset và Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+// Welcome Notification
+const welcomeNotification = document.getElementById('welcomeNotification');
+const countdownElement = document.getElementById('countdown');
+
+// Show notification when page loads
+window.onload = function() {
+    setTimeout(() => {
+        welcomeNotification.classList.add('show');
+        startCountdown();
+    }, 1000);
+};
+
+// Close notification
+function closeNotification() {
+    welcomeNotification.classList.remove('show');
 }
 
-body {
-    color: #fff;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
+// Auto close after 60 seconds
+function startCountdown() {
+    let seconds = 60;
+    const countdownInterval = setInterval(() => {
+        seconds--;
+        countdownElement.textContent = seconds;
+        
+        if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            closeNotification();
+        }
+    }, 1000);
 }
 
-/* Background Layers */
-.background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg') center/cover no-repeat;
-    z-index: -2;
-    opacity: 0.3;
+// Auth System
+const registerBtn = document.getElementById('registerBtn');
+const loginBtn = document.getElementById('loginBtn');
+const registerModal = document.getElementById('registerModal');
+const loginModal = document.getElementById('loginModal');
+const authButtons = document.getElementById('authButtons');
+const userInfo = document.getElementById('userInfo');
+const usernameDisplay = document.getElementById('usernameDisplay');
+const balanceDisplay = document.getElementById('balance');
+
+// Open Register Modal
+registerBtn.addEventListener('click', () => {
+    registerModal.style.display = 'block';
+});
+
+// Open Login Modal
+loginBtn.addEventListener('click', () => {
+    loginModal.style.display = 'block';
+});
+
+// Close Modal
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
 }
 
-.black-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: -1;
+// Switch between Login and Register
+function showLogin() {
+    registerModal.style.display = 'none';
+    loginModal.style.display = 'block';
 }
 
-.main-content {
-    position: relative;
-    z-index: 1;
+function showRegister() {
+    loginModal.style.display = 'none';
+    registerModal.style.display = 'block';
 }
 
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid #333;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #4CAF50;
-    text-transform: uppercase;
-}
-
-.user-section {
-    display: flex;
-    align-items: center;
-}
-
-#authButtons button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    margin-left: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#authButtons button:hover {
-    background-color: #45a049;
-}
-
-#userInfo {
-    color: #fff;
-    font-size: 16px;
-    margin-left: 15px;
-}
-
-/* Notification */
-.notification {
-    position: fixed;
-    top: -300px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 600px;
-    background-color: #222;
-    border: 1px solid #4CAF50;
-    border-radius: 8px;
-    padding: 20px;
-    z-index: 1000;
-    transition: top 0.5s ease-out;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
-
-.notification.show {
-    top: 20px;
-}
-
-.notification-content {
-    position: relative;
-}
-
-.close-btn {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: #f44336;
-    color: white;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.notification h2 {
-    color: #4CAF50;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.notification p {
-    margin-bottom: 10px;
-    line-height: 1.5;
-    text-align: center;
-}
-
-.notification-footer {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.notification-footer button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.auto-close {
-    color: #aaa;
-    font-size: 14px;
-}
-
-/* Products */
-.products-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 30px 5%;
-}
-
-.product-card {
-    background-color: rgba(30, 30, 30, 0.9);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s;
-    border: 1px solid #333;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border-color: #4CAF50;
-}
-
-.product-image img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.product-info {
-    padding: 15px;
-}
-
-.product-info h3 {
-    color: #4CAF50;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.product-description {
-    color: #ccc;
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.product-price {
-    font-weight: bold;
-    color: #fff;
-    font-size: 16px;
-}
-
-.detail-btn {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.detail-btn:hover {
-    background-color: #0b7dda;
-}
-
-/* Detail Modal Content */
-.detail-content {
-    padding: 10px;
-    line-height: 1.6;
-}
-
-.detail-content p {
-    margin-bottom: 10px;
-}
-
-.detail-content ul {
-    margin-left: 20px;
-    margin-bottom: 15px;
-}
-
-/* Footer */
-.footer {
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 30px 5%;
-    margin-top: 40px;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.contact-info h3, 
-.social-links h3 {
-    color: #4CAF50;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.contact-info p, 
-.social-links a {
-    color: #ddd;
-    margin-bottom: 10px;
-    display: block;
-    text-decoration: none;
-}
-
-.contact-info i, 
-.social-links i {
-    margin-right: 10px;
-    width: 20px;
-    text-align: center;
-}
-
-.copyright {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #333;
-    color: #aaa;
-    font-size: 14px;
-}
-
-/* Modals */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.modal-content {
-    background-color: #222;
-    margin: 10% auto;
-    padding: 25px;
-    border: 1px solid #4CAF50;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 8px;
-    position: relative;
-}
-
-.modal .close {
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.modal .close:hover {
-    color: #fff;
-}
-
-.modal h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #4CAF50;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #ddd;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    background-color: #333;
-    border: 1px solid #444;
-    color: #fff;
-    border-radius: 4px;
-}
-
-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-.auth-link {
-    text-align: center;
-    margin-top: 15px;
-    color: #aaa;
-}
-
-.auth-link a {
-    color: #4CAF50;
-    text-decoration: none;
-}
-
-/* Snow Effect */
-#snowCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        padding: 15px;
+// Register Form
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    if (password !== confirmPassword) {
+        alert('Mật khẩu không khớp!');
+        return;
     }
     
-    .logo {
-        margin-bottom: 15px;
-    }
+    // Save user to localStorage
+    localStorage.setItem('currentUser', JSON.stringify({
+        username: username,
+        password: password,
+        balance: 0
+    }));
     
-    .auth-buttons {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
+    // Update UI
+    updateUserInfo(username, 0);
+    closeModal('registerModal');
+    alert('Đăng ký thành công!');
+});
+
+// Login Form
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
     
-    .auth-buttons button {
-        margin: 0;
-        width: 48%;
-    }
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
     
-    .products-container {
-        grid-template-columns: 1fr;
-        padding: 15px;
-    }
+    const userData = JSON.parse(localStorage.getItem('currentUser'));
     
-    .modal-content {
-        width: 90%;
-        margin: 20% auto;
+    if (userData && username === userData.username && password === userData.password) {
+        updateUserInfo(userData.username, userData.balance);
+        closeModal('loginModal');
+        alert('Đăng nhập thành công!');
+    } else {
+        alert('Tên đăng nhập hoặc mật khẩu không đúng!');
     }
-    
-    #userInfo {
-        margin-top: 15px;
-        width: 100%;
-        text-align: center;
+});
+
+// Update User Info
+function updateUserInfo(username, balance) {
+    usernameDisplay.textContent = username;
+    balanceDisplay.textContent = balance;
+    userInfo.style.display = 'block';
+    authButtons.style.display = 'none';
+}
+
+// Check if user is logged in
+function checkLoggedIn() {
+    const userData = JSON.parse(localStorage.getItem('currentUser'));
+    if (userData) {
+        updateUserInfo(userData.username, userData.balance);
     }
 }
 
-@media (max-width: 480px) {
-    .modal-content {
-        padding: 15px;
+// Product Details
+const productDetails = {
+    1: {
+        title: "Gói Cơ Bản - 50.000đ",
+        content: `
+            <p><strong>Tác dụng:</strong></p>
+            <ul>
+                <li>100k 1 năm</li>
+                <li>Hướng dẫn cài đầy đủ, không hiểu thì hỏi</li>
+                <li>All rank, all map, siêu nhạy thích hợp bắn phòng hoặc kèo</li>
+                <li>ADR và iOS cài app không lo bị check</li>
+                <li>Tăng nhạy 70%, máy càng khỏe càng nhạy, fix rung tâm, fix lag</li>
+                <li>Không phải aim, hack, data khóa acc</li>
+                <li>Cài được iOS lẫn Android</li>
+            </ul>
+            <p><strong>Lưu ý:</strong> Sản phẩm không liên quan đến hack hay phần mềm bất hợp pháp</p>
+        `
+    },
+    2: {
+        title: "Gói Nâng Cao - 100.000đ",
+        content: `
+            <p><strong>Tác dụng:</strong></p>
+            <ul>
+                <li>100k 1 năm</li>
+                <li>Hướng dẫn cài đầy đủ, không hiểu thì hỏi</li>
+                <li>All rank, all map, siêu nhạy thích hợp bắn phòng hoặc kèo</li>
+                <li>ADR và iOS cài app không lo bị check</li>
+                <li>Tăng nhạy 90%, máy càng khỏe càng nhạy, fix rung tâm, fix lag, có aimlock sẵn</li>
+                <li>Không phải aim, hack, data khóa acc, ae xem trong vd có thể thấy đoạn mình check tâm</li>
+                <li>Cài được iOS lẫn Android</li>
+            </ul>
+            <p><strong>Ưu đãi:</strong> Những ae nào trước đó mua reg 50k của mình rồi thì nếu muốn nâng lên bản này chỉ mất 50k thôi nhé. Đây là bản nâng cấp, x2 tác dụng, nhưng ae nào không có điều kiện vẫn có thể mua bản 50k để chơi vẫn ok nhé.</p>
+        `
     }
-    
-    .product-footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .detail-btn {
-        width: 100%;
-        margin-top: 10px;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
+};
+
+// Show Product Detail
+function showDetail(productId) {
+    const detail = productDetails[productId];
+    document.getElementById('detailTitle').textContent = detail.title;
+    document.getElementById('detailContent').innerHTML = detail.content;
+    document.getElementById('detailModal').style.display = 'block';
 }
+
+// Snow Effect
+function createSnow() {
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const snowflakes = [];
+    const snowflakeCount = 100;
+    
+    for (let i = 0; i < snowflakeCount; i++) {
+        snowflakes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 3 + 1,
+            speed: Math.random() * 2 + 1,
+            opacity: Math.random()
+        });
+    }
+    
+    function drawSnowflakes() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        
+        snowflakes.forEach(flake => {
+            ctx.beginPath();
+            ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            flake.y += flake.speed;
+            
+            if (flake.y > canvas.height) {
+                flake.y = 0;
+                flake.x = Math.random() * canvas.width;
+            }
+        });
+        
+        requestAnimationFrame(drawSnowflakes);
+    }
+    
+    drawSnowflakes();
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', function() {
+    checkLoggedIn();
+    createSnow();
+});
