@@ -8,73 +8,158 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Welcome Modal -->
-    <div id="welcomeModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+    <!-- Welcome Notification -->
+    <div id="welcomeNotification" class="notification">
+        <div class="notification-content">
+            <span class="close-btn" onclick="closeNotification()">&times;</span>
             <h2>Chào Mừng Bạn Đến Với Website Của LeDucPer</h2>
             <p>Web bán các sản phẩm từ Admin LeDucPer</p>
             <p>Ae có thể tham khảo và mua trên web hoặc có thể liên hệ riêng admin để mua</p>
             <p>Admin không bán hack nên mọi sản phẩm được bán không liên quan đến phần mềm ban acc của ae</p>
-            <div class="modal-footer">
-                <span class="auto-close">Tự động đóng trong <span id="countdown">60</span> giây</span>
-                <button onclick="closeModal()">Đóng ngay</button>
+            <div class="notification-footer">
+                <span class="auto-close">Đóng trong <span id="countdown">60</span> giây</span>
+                <button onclick="closeNotification()">Đóng ngay</button>
             </div>
         </div>
     </div>
 
-    <!-- Snow Effect Canvas -->
+    <!-- Snow Effect -->
     <canvas id="snowCanvas"></canvas>
 
     <!-- Background Layers -->
-    <div class="background-layer"></div>
+    <div class="background-image"></div>
+    <div class="black-overlay"></div>
+    
     <div class="main-content">
         <!-- Header -->
         <header>
             <div class="logo">SHOPLEDUCPER</div>
-            <div class="auth-buttons">
-                <button id="registerBtn">Đăng ký</button>
-                <button id="loginBtn">Đăng nhập</button>
+            <div class="user-section">
+                <div id="authButtons">
+                    <button id="registerBtn">Đăng ký</button>
+                    <button id="loginBtn">Đăng nhập</button>
+                </div>
                 <div id="userInfo" style="display: none;">
                     <span id="usernameDisplay"></span>/<span id="balance">0</span>đ
                 </div>
             </div>
         </header>
 
-        <!-- Main Content -->
+        <!-- Main Content - Products -->
         <main>
-            <!-- Products will be added here -->
+            <div class="products-container">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme Premium">
+                    </div>
+                    <div class="product-info">
+                        <h3>Meme Premium Pack 1</h3>
+                        <p class="product-description">Bộ sưu tập meme chất lượng cao, độc quyền từ SHOPLEDUCPER</p>
+                        <div class="product-footer">
+                            <span class="product-price">100.000đ</span>
+                            <button class="buy-btn">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme VIP">
+                    </div>
+                    <div class="product-info">
+                        <h3>Meme VIP Collection</h3>
+                        <p class="product-description">Tuyển tập meme đặc biệt chỉ có tại SHOPLEDUCPER</p>
+                        <div class="product-footer">
+                            <span class="product-price">150.000đ</span>
+                            <button class="buy-btn">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3>Meme Pro Package</h3>
+                        <p class="product-description">Gói meme chuyên nghiệp dành cho dân chơi hệ meme</p>
+                        <div class="product-footer">
+                            <span class="product-price">200.000đ</span>
+                            <button class="buy-btn">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme Deluxe">
+                    </div>
+                    <div class="product-info">
+                        <h3>Meme Deluxe Edition</h3>
+                        <p class="product-description">Phiên bản cao cấp nhất với những meme độc nhất vô nhị</p>
+                        <div class="product-footer">
+                            <span class="product-price">250.000đ</span>
+                            <button class="buy-btn">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Liên hệ</h3>
+                    <p><i class="fas fa-user"></i> Admin: LeDucPer</p>
+                    <p><i class="fas fa-envelope"></i> Email: leducper@example.com</p>
+                    <p><i class="fas fa-phone"></i> SĐT: 0123.456.789</p>
+                </div>
+                <div class="social-links">
+                    <h3>Mạng xã hội</h3>
+                    <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SHOPLEDUCPER. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
 
     <!-- Register Modal -->
-    <div id="registerModal" class="modal auth-modal">
+    <div id="registerModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
             <h2>Đăng Ký Tài Khoản</h2>
             <form id="registerForm">
                 <div class="form-group">
-                    <label for="regUsername">Tên đăng nhập:</label>
-                    <input type="text" id="regUsername" required>
+                    <label for="username">Tên đăng nhập:</label>
+                    <input type="text" id="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="regPassword">Mật khẩu:</label>
-                    <input type="password" id="regPassword" required>
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" required>
                 </div>
                 <div class="form-group">
-                    <label for="regConfirmPassword">Nhập lại mật khẩu:</label>
-                    <input type="password" id="regConfirmPassword" required>
+                    <label for="confirmPassword">Nhập lại mật khẩu:</label>
+                    <input type="password" id="confirmPassword" required>
                 </div>
                 <button type="submit">TẠO TÀI KHOẢN</button>
             </form>
-            <p class="auth-switch">Tôi đã có tài khoản? <a href="#" onclick="switchToLogin()">Đăng nhập</a></p>
+            <p class="auth-link">Tôi đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
         </div>
     </div>
 
     <!-- Login Modal -->
-    <div id="loginModal" class="modal auth-modal">
+    <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
             <h2>Đăng Nhập</h2>
             <form id="loginForm">
                 <div class="form-group">
@@ -87,7 +172,7 @@
                 </div>
                 <button type="submit">ĐĂNG NHẬP</button>
             </form>
-            <p class="auth-switch">Chưa có tài khoản? <a href="#" onclick="switchToRegister()">Đăng ký</a></p>
+            <p class="auth-link">Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
         </div>
     </div>
 
