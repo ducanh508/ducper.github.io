@@ -1,16 +1,18 @@
-// Welcome Modal
-const welcomeModal = document.getElementById('welcomeModal');
+// Welcome Notification
+const welcomeNotification = document.getElementById('welcomeNotification');
 const countdownElement = document.getElementById('countdown');
 
-// Show modal when page loads
+// Show notification when page loads
 window.onload = function() {
-    welcomeModal.style.display = 'block';
-    startCountdown();
+    setTimeout(() => {
+        welcomeNotification.classList.add('show');
+        startCountdown();
+    }, 1000);
 };
 
-// Close modal
-function closeModal() {
-    welcomeModal.style.display = 'none';
+// Close notification
+function closeNotification() {
+    welcomeNotification.classList.remove('show');
 }
 
 // Auto close after 60 seconds
@@ -22,16 +24,17 @@ function startCountdown() {
         
         if (seconds <= 0) {
             clearInterval(countdownInterval);
-            closeModal();
+            closeNotification();
         }
     }, 1000);
 }
 
-// Auth Modals
-const registerModal = document.getElementById('registerModal');
-const loginModal = document.getElementById('loginModal');
+// Auth System
 const registerBtn = document.getElementById('registerBtn');
 const loginBtn = document.getElementById('loginBtn');
+const registerModal = document.getElementById('registerModal');
+const loginModal = document.getElementById('loginModal');
+const authButtons = document.getElementById('authButtons');
 const userInfo = document.getElementById('userInfo');
 const usernameDisplay = document.getElementById('usernameDisplay');
 const balanceDisplay = document.getElementById('balance');
@@ -46,96 +49,102 @@ loginBtn.addEventListener('click', () => {
     loginModal.style.display = 'block';
 });
 
-// Close Register Modal
-function closeRegisterModal() {
-    registerModal.style.display = 'none';
+// Close Modal
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
 }
 
-// Close Login Modal
-function closeLoginModal() {
-    loginModal.style.display = 'none';
-}
-
-// Switch to Login from Register
-function switchToLogin() {
+// Switch between Login and Register
+function showLogin() {
     registerModal.style.display = 'none';
     loginModal.style.display = 'block';
 }
 
-// Switch to Register from Login
-function switchToRegister() {
+function showRegister() {
     loginModal.style.display = 'none';
     registerModal.style.display = 'block';
 }
 
-// User Registration
-const registerForm = document.getElementById('registerForm');
-registerForm.addEventListener('submit', function(e) {
+// Register Form
+document.getElementById('registerForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const username = document.getElementById('regUsername').value;
-    const password = document.getElementById('regPassword').value;
-    const confirmPassword = document.getElementById('regConfirmPassword').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
     
     if (password !== confirmPassword) {
         alert('Mật khẩu không khớp!');
         return;
     }
     
-    // Save to localStorage
-    localStorage.setItem('username', username);
-    localStorage.setItem('password', password);
-    localStorage.setItem('balance', '0');
+    // Save user to localStorage
+    localStorage.setItem('currentUser', JSON.stringify({
+        username: username,
+        password: password,
+        balance: 0
+    }));
     
     // Update UI
-    updateUserInfo(username, '0');
-    closeRegisterModal();
+    updateUserInfo(username, 0);
+    closeModal('registerModal');
     alert('Đăng ký thành công!');
 });
 
-// User Login
-const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', function(e) {
+// Login Form
+document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
     
-    const savedUsername = localStorage.getItem('username');
-    const savedPassword = localStorage.getItem('password');
-    const savedBalance = localStorage.getItem('balance');
+    const userData = JSON.parse(localStorage.getItem('currentUser'));
     
-    if (username === savedUsername && password === savedPassword) {
-        // Update UI
-        updateUserInfo(username, savedBalance);
-        closeLoginModal();
+    if (userData && username === userData.username && password === userData.password) {
+        updateUserInfo(userData.username, userData.balance);
+        closeModal('loginModal');
         alert('Đăng nhập thành công!');
     } else {
         alert('Tên đăng nhập hoặc mật khẩu không đúng!');
     }
 });
 
-// Update User Info in Header
+// Update User Info
 function updateUserInfo(username, balance) {
     usernameDisplay.textContent = username;
     balanceDisplay.textContent = balance;
     userInfo.style.display = 'block';
-    registerBtn.style.display = 'none';
-    loginBtn.style.display = 'none';
+    authButtons.style.display = 'none';
 }
 
-// Check if user is already logged in
+// Check if user is logged in
 function checkLoggedIn() {
-    const savedUsername = localStorage.getItem('username');
-    const savedBalance = localStorage.getItem('balance');
-    
-    if (savedUsername) {
-        updateUserInfo(savedUsername, savedBalance);
+    const userData = JSON.parse(localStorage.getItem('currentUser'));
+    if (userData) {
+        updateUserInfo(userData.username, userData.balance);
     }
 }
 
-// Initialize
-checkLoggedIn();
+// Product System
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listeners to buy buttons
+    document.querySelectorAll('.buy-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productName = this.closest('.product-card').querySelector('h3').textContent;
+            
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('currentUser');
+            if (!isLoggedIn) {
+                alert('Vui lòng đăng nhập để mua hàng!');
+                loginModal.style.display = 'block';
+                return;
+            }
+            
+            alert(`Bạn đã mua thành công sản phẩm: ${productName}`);
+        });
+    });
+});
 
 // Snow Effect
 function createSnow() {
@@ -186,5 +195,8 @@ function createSnow() {
     });
 }
 
-// Start Snow Effect
-createSnow();
+// Initialize everything
+document.addEventListener('DOMContentLoaded', function() {
+    checkLoggedIn();
+    createSnow();
+});
