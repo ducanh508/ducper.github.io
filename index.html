@@ -51,14 +51,14 @@
                 <!-- Product 1 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme Premium">
+                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Gói Cơ Bản">
                     </div>
                     <div class="product-info">
-                        <h3>Meme Premium Pack 1</h3>
-                        <p class="product-description">Bộ sưu tập meme chất lượng cao, độc quyền từ SHOPLEDUCPER</p>
+                        <h3>Gói Cơ Bản</h3>
+                        <p class="product-description">Bản tiêu chuẩn dành cho mọi người</p>
                         <div class="product-footer">
-                            <span class="product-price">100.000đ</span>
-                            <button class="buy-btn">Mua ngay</button>
+                            <span class="product-price">50.000đ</span>
+                            <button class="detail-btn" onclick="showDetail(1)">Chi tiết</button>
                         </div>
                     </div>
                 </div>
@@ -66,44 +66,14 @@
                 <!-- Product 2 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme VIP">
+                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Gói Nâng Cao">
                     </div>
                     <div class="product-info">
-                        <h3>Meme VIP Collection</h3>
-                        <p class="product-description">Tuyển tập meme đặc biệt chỉ có tại SHOPLEDUCPER</p>
+                        <h3>Gói Nâng Cao</h3>
+                        <p class="product-description">Bản cao cấp với nhiều tính năng</p>
                         <div class="product-footer">
-                            <span class="product-price">150.000đ</span>
-                            <button class="buy-btn">Mua ngay</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme Pro">
-                    </div>
-                    <div class="product-info">
-                        <h3>Meme Pro Package</h3>
-                        <p class="product-description">Gói meme chuyên nghiệp dành cho dân chơi hệ meme</p>
-                        <div class="product-footer">
-                            <span class="product-price">200.000đ</span>
-                            <button class="buy-btn">Mua ngay</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://i.pinimg.com/736x/60/c2/9e/60c29e0061b7da92aafea2b621895118.jpg" alt="Meme Deluxe">
-                    </div>
-                    <div class="product-info">
-                        <h3>Meme Deluxe Edition</h3>
-                        <p class="product-description">Phiên bản cao cấp nhất với những meme độc nhất vô nhị</p>
-                        <div class="product-footer">
-                            <span class="product-price">250.000đ</span>
-                            <button class="buy-btn">Mua ngay</button>
+                            <span class="product-price">100.000đ</span>
+                            <button class="detail-btn" onclick="showDetail(2)">Chi tiết</button>
                         </div>
                     </div>
                 </div>
@@ -173,6 +143,17 @@
                 <button type="submit">ĐĂNG NHẬP</button>
             </form>
             <p class="auth-link">Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close" onclick="closeModal('detailModal')">&times;</span>
+            <h2 id="detailTitle">Chi tiết sản phẩm</h2>
+            <div id="detailContent" class="detail-content">
+                <!-- Nội dung sẽ được thêm bằng JavaScript -->
+            </div>
         </div>
     </div>
 
