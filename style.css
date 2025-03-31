@@ -1,4 +1,4 @@
-/* Reset */
+/* Reset và Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -214,8 +214,8 @@ header {
     font-size: 16px;
 }
 
-.buy-btn {
-    background-color: #4CAF50;
+.detail-btn {
+    background-color: #2196F3;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -224,8 +224,23 @@ header {
     transition: background-color 0.3s;
 }
 
-.buy-btn:hover {
-    background-color: #45a049;
+.detail-btn:hover {
+    background-color: #0b7dda;
+}
+
+/* Detail Modal Content */
+.detail-content {
+    padding: 10px;
+    line-height: 1.6;
+}
+
+.detail-content p {
+    margin-bottom: 10px;
+}
+
+.detail-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
 }
 
 /* Footer */
@@ -417,7 +432,7 @@ form button {
         align-items: flex-start;
     }
     
-    .buy-btn {
+    .detail-btn {
         width: 100%;
         margin-top: 10px;
     }
